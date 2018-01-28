@@ -1,15 +1,25 @@
+* {	
+	margin: .25em;
+}
+
 button {
 	color: #fff;
 	background-color: #009688;
 	font-size: 16px;
-	padding: 0.5em 1em;
+	padding: .4em 1em;
+}
+button:hover {
+	background: red;
+	color: #fff;
 }
 
 table {
 	border: 1px solid red;
+	width: 80%;
+	margin: 0.25em;
 }
 tr {
-	background-color: #ccc;
+	background-color: #ccc;	
 }
 
 input {
