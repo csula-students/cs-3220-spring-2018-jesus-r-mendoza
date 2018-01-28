@@ -1,0 +1,13 @@
+button {
+	color: #fff;
+	background-color: #009688;
+	font-size: 16px;
+	padding: 0.5em 1em;
+}
+
+table {
+	border: 1px solid red;
+}
+tr {
+	background-color: #ccc;
+}
