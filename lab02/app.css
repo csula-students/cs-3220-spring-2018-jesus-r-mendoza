@@ -1,0 +1,35 @@
+* {
+    color: green;
+}
+h1 {
+    margin: .5em;
+}
+.generators {
+    display: inline-block;
+    flex-flow: row;
+    margin: 1em;
+    padding: .3em;
+    border: solid;
+    border-color: black;
+}
+
+.quantity {
+    margin-left: 3.2em;
+}
+.price {
+    margin-left: 7.6em;
+}
+
+.resources {
+    margin: 1em;
+}
+
+button {
+    margin-left: 32.5em;
+}
+
+.lines {
+    margin: 1em;
+    overflow: scroll;
+}
+
