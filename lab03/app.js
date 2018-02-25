@@ -25,15 +25,14 @@ class PubSub {
 }
 
 const pubSub = new PubSub();
-var quant = window.incrementalGame.state.counter;
 const resCount = document.querySelector('#count');
 const btn = document.querySelector('button');
 
 btn.addEventListener('click', () => {
-    pubSub.publish(quant);
+    pubSub.publish(window.incrementalGame.state.counter);
 });
 
 pubSub.subscribe(actionn => {
-    quant++;
-    resCount.innerHTML = quant;
+    window.incrementalGame.state.counter++;
+    resCount.innerHTML = window.incrementalGame.state.counter;
 });
