@@ -1,7 +1,0 @@
-matrix:
-  include:
-    - language: node_js
-      node_js:
-        - "8"
-      before_script:
-        - cd lab03/cookie-clicker-lab3/client
