@@ -29,10 +29,9 @@ const resCount = document.querySelector('#count');
 const btn = document.querySelector('button');
 
 btn.addEventListener('click', () => {
-    pubSub.publish(window.incrementalGame.state.counter);
+    pubSub.publish(window.incrementalGame.state.counter++);
 });
 
-pubSub.subscribe(actionn => {
-    window.incrementalGame.state.counter++;
+pubSub.subscribe(action => {
     resCount.innerHTML = window.incrementalGame.state.counter;
 });

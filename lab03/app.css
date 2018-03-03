@@ -2,16 +2,16 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
 @import url('https://fonts.googleapis.com/css?family=Merriweather:400,700');
 
+* {
+  color: aliceblue;
+}
+
 body {
-  background-color: white;
   font-family: "Open Sans", sans-serif;
   padding: 5px 25px;
   font-size: 18px;
-  margin: 0;
-  color: #444;
-  
-  background-image: url("img/2.jpg");
-  
+  margin: 0;];  
+  background-image: url("img/2.jpg");  
 }
 
 h1 {
@@ -19,12 +19,10 @@ h1 {
   font-family: "Merriweather", serif;
   font-size: 42px;
   margin: .5em;
-  color: aliceblue;
 }
 
 label {
   padding: .2em;
-  color: aliceblue;
 }
 
 button {
@@ -46,7 +44,6 @@ button:active {
   margin: 1em;
   padding: .5em;
   overflow: scroll;
-  color: aliceblue;
   background: rgba(33, 88, 9, 0.81);
 }
 
@@ -71,16 +68,17 @@ button:active {
   background-color: rgba(33, 88, 9, 0.71);
 }
 
-.description {
-  padding: .5em
+#gen_title {
+    display: flex;
 }
+
+.description {
+  padding: .5em;
+}
+
 .top_row, .btm_row {
   display: flex;
   justify-content: space-between;
-}
-
-.description, .top_row, .btm_row {
-  color: aliceblue;
 }
 
 .resources {
@@ -89,4 +87,18 @@ button:active {
   margin: 1em;
   padding: 2em 1em;
   align-items: center;
+}
+
+h3 {
+    margin: .2em;
+    padding: .2em;
+}
+
+h2 {
+    margin: 1em;
+    padding: 1em;
+}
+
+.rec_labels {
+    display: flex;
 }

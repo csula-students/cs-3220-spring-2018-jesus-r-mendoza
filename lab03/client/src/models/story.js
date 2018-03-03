@@ -18,13 +18,13 @@ export default class Story {
 	 */
 	isUnlockYet (value) {
 		// TODO: implement based on doc
-		return false;
+		return value >= this.meta.triggeredAt;
 	}
 
 	/**
 	 * unlock simply unlock the story to visible state
 	 */
 	unlock () {
-		// TODO: change the story state to "visible"
+		story.state = true;
 	}
 }

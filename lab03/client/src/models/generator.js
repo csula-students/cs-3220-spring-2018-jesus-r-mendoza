@@ -27,8 +27,12 @@ export default class Generator {
 	 * @return {number} the cost of buying another generator
 	 */
 	getCost () {
-		// TODO: implement the function according to doc above
-		return 0;
+        let currCost = this.baseCost;
+        if(this.quantity !== 0) {
+            currCost = this.baseCost * Math.pow(1 + (.005 * this.rate), this.quantity);
+            currCost = Number(currCost.toFixed(2));
+        }
+        return currCost;
 	}
 
 	/**
@@ -37,7 +41,6 @@ export default class Generator {
 	 * @return {number} how much this generator generates
 	 */
 	generate () {
-		// TODO: implement based on doc above
-		return 0;
+		return this.rate * this.quantity;
 	}
 }
