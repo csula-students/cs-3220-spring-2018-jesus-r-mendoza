@@ -167,34 +167,39 @@ main();
 
 // main function wraps everything at top level
 function main() {
-	// TODO: fill the blank based on the theme you have choosen
-	const initialState = {
-		example: 'Hello custom element',
-		counter: 0,
-		generators: [],
-		story: []
-	};
+  // TODO: fill the blank based on the theme you have choosen
+  const initialState = {
+    example: 'Hello custom element',
+    counter: 0,
+    generators: [{
+      name: 'cursor',
+      rate: 5,
+      cost: 0,
+      quantity: 0
+    }, {}],
+    story: []
+  };
 
-	// initialize store
-	const store = new _store2.default(_reducer2.default, initialState);
-	console.log((0, _example2.default)(store));
+  // initialize store
+  const store = new _store2.default(_reducer2.default, initialState);
+  console.log((0, _example2.default)(store));
 
-	// define web components
-	window.customElements.define('component-example', (0, _example2.default)(store));
-	// no longer used
-	window.customElements.define('game-button', (0, _button2.default)(store));
-	window.customElements.define('game-counter', (0, _counter2.default)(store));
-	// lab 3
-	window.customElements.define('game-generator', (0, _generator2.default)(store));
-	// homework 1
-	window.customElements.define('game-story-book', (0, _storyBook2.default)(store));
+  // define web components
+  window.customElements.define('component-example', (0, _example2.default)(store));
+  // no longer used
+  window.customElements.define('game-button', (0, _button2.default)(store));
+  window.customElements.define('game-counter', (0, _counter2.default)(store));
+  // lab 3
+  window.customElements.define('game-generator', (0, _generator2.default)(store));
+  // homework 1
+  window.customElements.define('game-story-book', (0, _storyBook2.default)(store));
 
-	// For ease of debugging purpose, we will expose the critical store under window
-	// ps: window is global
-	window.store = store;
+  // For ease of debugging purpose, we will expose the critical store under window
+  // ps: window is global
+  window.store = store;
 
-	// start game loop
-	(0, _game.loop)(store);
+  // start game loop
+  (0, _game.loop)(store);
 }
 
 /***/ }),
@@ -739,6 +744,8 @@ function reducer(state, action) {
 		case 'EXAMPLE_MUTATION':
 			state.example = action.payload;
 			return state;
+		case 'BUTTON_CLICK':
+			return state;
 		default:
 			return state;
 	}
@@ -786,17 +793,18 @@ exports.default = function (store) {
 			super();
 			this.store = store;
 			// TODO: render counter inner HTML based on the store state
-
 			this.onStateChange = this.handleStateChange.bind(this);
 		}
 
 		handleStateChange(newState) {
 			console.log('CounterComponent#stateChange', this, newState);
 			// TODO: update inner HTML based on the new state
+			this.textContent = newState;
 		}
 
 		connectedCallback() {
 			this.store.subscribe(this.onStateChange);
+			this.innerHTML = `<p> hello counter </p>`;
 		}
 
 		disconnectedCallback() {

@@ -4,8 +4,7 @@ export default function (store) {
 			super();
 			this.store = store;
 			// TODO: render counter inner HTML based on the store state
-            this.textContent = this.store.state.counter;
-			this.onStateChange = this.handleStateChange.bind(this);
+            this.onStateChange = this.handleStateChange.bind(this);
 		}
 
 		handleStateChange (newState) {
@@ -16,6 +15,7 @@ export default function (store) {
 
 		connectedCallback () {
 			this.store.subscribe(this.onStateChange);
+            this.innerHTML = `<p> hello counter </p>`;
 		}
 
 		disconnectedCallback () {

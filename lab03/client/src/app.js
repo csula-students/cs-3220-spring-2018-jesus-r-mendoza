@@ -77,7 +77,18 @@ function main () {
 	const initialState = {
 		example: 'Hello custom element',
 		counter: 0,
-		generators: [],
+		generators: [
+            {
+                name: 'cursor',
+                rate: 5,
+                cost: 0,
+                quantity: 0
+            },
+            {
+                
+            }
+            
+        ],
 		story: []
 	};
 
