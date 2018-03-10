@@ -1,3 +1,5 @@
+import Generator from '../models/generator';
+
 export default function (store) {
 	return class GeneratorComponent extends window.HTMLElement {
 		constructor () {
@@ -11,6 +13,11 @@ export default function (store) {
             
 			// TODO: add click event            
             console.log("constructed ---");
+            this.addEventListener('click', () => {
+                payload: {
+                    name: generator.name                    
+                }
+            });
             
 		}
         
@@ -20,11 +27,32 @@ export default function (store) {
 		}
         
 		connectedCallback () {
-            console.log("  btn connected  ")
-			const generator = new Generator(Object.assign({}, store.state.generators[this.dataset.id]));
-
-            this.innerHTML = `<h1>hello</h1>`;
-
+            
+            this.id = this.dataset.id;
+			const generator = new Generator(Object.assign({}, this.store.state.generators[this.id]));
+            
+            this.innerHTML = `
+                <div class="generators">
+          
+                    <div class="top_row">
+                        <label>Cursor</label>
+                        <label class="quantity">amt</label>
+                    </div>
+          
+                    <p class="description">Description... 
+                        dolor sit amet, consectetur adipiscing elit. Maecenas congue, 
+                        mauris quis mollis cursus, felis tellus ultricies nunc, eu sodales 
+                        dolor urna quis augue
+                    </p>
+          
+                    <div class="btm_row">
+                        <label class="rate">rate</label>
+                        <label class="price">Price</label>
+                    </div>
+          
+                </div>`;
+            this.store.subscribe(this.onStateChange);
+            console.log("  gen connected  ");
 		}
 
 		disconnectedCallback () {

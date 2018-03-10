@@ -1,5 +1,5 @@
 import Generator from '../src/models/generator';
-import constants from './constants'
+import constants from './constants';
 
 export default function reducer (state, action) {
 	switch (action.type) {
@@ -8,7 +8,7 @@ export default function reducer (state, action) {
 		return state;
     case constants.actions.BUY_GENERATOR:
             
-        let index = -1;
+        let index = 0;
 
 		for (let i = 0; i < state.generators.length; i++) {
 		if (state.generators[i].name == action.payload.name) {

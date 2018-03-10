@@ -160,9 +160,9 @@ function main () {
                 unlockValue: 10
             }
             
-        ],
-		story: []
-	};
+	   ], 
+        story: []
+    };
 
 	// initialize store
 	const store = new Store(reducer, initialState);

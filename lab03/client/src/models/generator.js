@@ -33,7 +33,7 @@ export default class Generator {
             currCost = Number(currCost.toFixed(2));
         }
         return currCost;
-	}
+    }
 
 	/**
 	 * generate computes how much this type of generator generates -
