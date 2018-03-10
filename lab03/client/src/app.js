@@ -79,13 +79,85 @@ function main () {
 		counter: 0,
 		generators: [
             {
-                name: 'cursor',
+                type: 'gen',
+                name: 'Cursor',
+                description: 'To be written at a later date..',
                 rate: 5,
-                cost: 0,
-                quantity: 0
+                quantity: 0,
+                basecost: 10,
+                unlockValue: 10
             },
             {
-                
+                type: 'gen',
+                name: 'Hands',
+                description: 'To be written at a later date..',
+                rate: 5,
+                quantity: 0,
+                basecost: 0,
+                unlockValue: 10
+            }, 
+            {
+                type: 'gen',
+                name: 'Sneezes',
+                description: 'To be written at a later date..',
+                rate: 5,
+                quantity: 0,
+                basecost: 0,
+                unlockValue: 10
+            },
+            {
+                type: 'gen',
+                name: 'People',
+                description: 'To be written at a later date..',
+                rate: 5,
+                quantity: 0,
+                basecost: 0,
+                unlockValue: 10
+            },
+            {
+                type: 'gen',
+                name: 'Cities',
+                description: 'To be written at a later date..',
+                rate: 5,
+                quantity: 0,
+                basecost: 0,
+                unlockValue: 10
+            },
+            {
+                type: 'gen',
+                name: 'States',
+                description: 'To be written at a later date..',
+                rate: 5,
+                quantity: 0,
+                basecost: 0,
+                unlockValue: 10
+            },
+            {
+                type: 'gen',
+                name: 'Countries',
+                description: 'To be written at a later date..',
+                rate: 5,
+                quantity: 0,
+                basecost: 0,
+                unlockValue: 10
+            },
+            {
+                type: 'gen',
+                name: 'Continents',
+                description: 'To be written at a later date..',
+                rate: 5,
+                quantity: 0,
+                basecost: 0,
+                unlockValue: 10
+            },
+            {
+                type: 'gen',
+                name: 'Planets',
+                description: 'To be written at a later date..',
+                rate: 5,
+                quantity: 0,
+                basecost: 0,
+                unlockValue: 10
             }
             
         ],

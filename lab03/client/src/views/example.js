@@ -23,7 +23,7 @@ export default function (store) {
 			console.log('ExampleComponent#stateChange', this);
 			this.textContent = newState.example;
 		}
-
+        
 		connectedCallback () {
 			console.log('ExampleComponent#onConnectedCallback');
 			this.store.subscribe(this.onStateChange);

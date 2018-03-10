@@ -82,23 +82,23 @@ var _reducer = __webpack_require__(6);
 
 var _reducer2 = _interopRequireDefault(_reducer);
 
-var _button = __webpack_require__(7);
+var _button = __webpack_require__(8);
 
 var _button2 = _interopRequireDefault(_button);
 
-var _counter = __webpack_require__(8);
+var _counter = __webpack_require__(9);
 
 var _counter2 = _interopRequireDefault(_counter);
 
-var _example = __webpack_require__(9);
+var _example = __webpack_require__(10);
 
 var _example2 = _interopRequireDefault(_example);
 
-var _generator = __webpack_require__(10);
+var _generator = __webpack_require__(11);
 
 var _generator2 = _interopRequireDefault(_generator);
 
-var _storyBook = __webpack_require__(11);
+var _storyBook = __webpack_require__(12);
 
 var _storyBook2 = _interopRequireDefault(_storyBook);
 
@@ -167,39 +167,106 @@ main();
 
 // main function wraps everything at top level
 function main() {
-  // TODO: fill the blank based on the theme you have choosen
-  const initialState = {
-    example: 'Hello custom element',
-    counter: 0,
-    generators: [{
-      name: 'cursor',
-      rate: 5,
-      cost: 0,
-      quantity: 0
-    }, {}],
-    story: []
-  };
+    // TODO: fill the blank based on the theme you have choosen
+    const initialState = {
+        example: 'Hello custom element',
+        counter: 0,
+        generators: [{
+            type: 'gen',
+            name: 'Cursor',
+            description: 'To be written at a later date..',
+            rate: 5,
+            quantity: 0,
+            basecost: 0,
+            unlockValue: 10
+        }, {
+            type: 'gen',
+            name: 'Hands',
+            description: 'To be written at a later date..',
+            rate: 5,
+            quantity: 0,
+            basecost: 0,
+            unlockValue: 10
+        }, {
+            type: 'gen',
+            name: 'Sneezes',
+            description: 'To be written at a later date..',
+            rate: 5,
+            quantity: 0,
+            basecost: 0,
+            unlockValue: 10
+        }, {
+            type: 'gen',
+            name: 'People',
+            description: 'To be written at a later date..',
+            rate: 5,
+            quantity: 0,
+            basecost: 0,
+            unlockValue: 10
+        }, {
+            type: 'gen',
+            name: 'Cities',
+            description: 'To be written at a later date..',
+            rate: 5,
+            quantity: 0,
+            basecost: 0,
+            unlockValue: 10
+        }, {
+            type: 'gen',
+            name: 'States',
+            description: 'To be written at a later date..',
+            rate: 5,
+            quantity: 0,
+            basecost: 0,
+            unlockValue: 10
+        }, {
+            type: 'gen',
+            name: 'Countries',
+            description: 'To be written at a later date..',
+            rate: 5,
+            quantity: 0,
+            basecost: 0,
+            unlockValue: 10
+        }, {
+            type: 'gen',
+            name: 'Continents',
+            description: 'To be written at a later date..',
+            rate: 5,
+            quantity: 0,
+            basecost: 0,
+            unlockValue: 10
+        }, {
+            type: 'gen',
+            name: 'Planets',
+            description: 'To be written at a later date..',
+            rate: 5,
+            quantity: 0,
+            basecost: 0,
+            unlockValue: 10
+        }],
+        story: []
+    };
 
-  // initialize store
-  const store = new _store2.default(_reducer2.default, initialState);
-  console.log((0, _example2.default)(store));
+    // initialize store
+    const store = new _store2.default(_reducer2.default, initialState);
+    console.log((0, _example2.default)(store));
 
-  // define web components
-  window.customElements.define('component-example', (0, _example2.default)(store));
-  // no longer used
-  window.customElements.define('game-button', (0, _button2.default)(store));
-  window.customElements.define('game-counter', (0, _counter2.default)(store));
-  // lab 3
-  window.customElements.define('game-generator', (0, _generator2.default)(store));
-  // homework 1
-  window.customElements.define('game-story-book', (0, _storyBook2.default)(store));
+    // define web components
+    window.customElements.define('component-example', (0, _example2.default)(store));
+    // no longer used
+    window.customElements.define('game-button', (0, _button2.default)(store));
+    window.customElements.define('game-counter', (0, _counter2.default)(store));
+    // lab 3
+    window.customElements.define('game-generator', (0, _generator2.default)(store));
+    // homework 1
+    window.customElements.define('game-story-book', (0, _storyBook2.default)(store));
 
-  // For ease of debugging purpose, we will expose the critical store under window
-  // ps: window is global
-  window.store = store;
+    // For ease of debugging purpose, we will expose the critical store under window
+    // ps: window is global
+    window.store = store;
 
-  // start game loop
-  (0, _game.loop)(store);
+    // start game loop
+    (0, _game.loop)(store);
 }
 
 /***/ }),
@@ -739,13 +806,38 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.default = reducer;
+
+var _constants = __webpack_require__(7);
+
+var _constants2 = _interopRequireDefault(_constants);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function reducer(state, action) {
 	switch (action.type) {
-		case 'EXAMPLE_MUTATION':
+		case _constants2.default.actions.EXAMPLE:
 			state.example = action.payload;
 			return state;
-		case 'BUTTON_CLICK':
+		case _constants2.default.actions.BUY_GENERATOR:
+			let index = -1;
+
+			for (var i = 0; i < state.generators.length; i++) {
+				if (state.generators[i].name == action.payload.name) {
+					index = i;
+				}
+			}
+
+			const generator = new Generator(Object.assign({}, state.generators[index]));
+			let price = Math.floor(generator.getCost());
+
+			if (state.counter >= cost) {
+				state.counter = state.counter - price;
+				state.generators[index].quantity++;
+			} else {
+				alert('Not Enough Gold');
+			}
 			return state;
+
 		default:
 			return state;
 	}
@@ -761,23 +853,58 @@ function reducer(state, action) {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-
-exports.default = function (store) {
-	return class ButtonComponent extends window.HTMLElement {
-		constructor() {
-			super();
-			this.store = store;
-
-			this.onStateChange = this.handleStateChange.bind(this);
-
-			// TODO: add click event to increment counter
-			// hint: use "store.dispatch" method (see example component)
-		}
-	};
+exports.default = {
+	growthRatio: 0.05,
+	actions: {
+		EXAMPLE: 'EXAMPLE_MUTATION',
+		BUY_GENERATOR: 'BUY_GENERATOR'
+	}
 };
 
 /***/ }),
 /* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = function (store) {
+    return class ButtonComponent extends window.HTMLElement {
+        constructor() {
+            super();
+            this.store = store;
+            this.textContent = 'button init';
+            this.onStateChange = this.handleStateChange.bind(this);
+            console.log(this.textContent, this.store);
+            // TODO: add click event to increment counter
+            // hint: use "store.dispatch" method (see example component)=
+        }
+
+        handleStateChange(newState) {
+            console.log('ExampleComponent#stateChange', this);
+            this.textContent = 'btn clicked';
+            console.log(this.textContent);
+        }
+
+        connectedCallback() {
+            console.log('ExampleComponent#onConnectedCallback');
+            this.store.subscribe(this.onStateChange);
+        }
+
+        disconnectedCallback() {
+            console.log('ExampleComponent#onDisconnectedCallback');
+            this.store.unsubscribe(this.onStateChange);
+        }
+
+    };
+};
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -814,7 +941,7 @@ exports.default = function (store) {
 };
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -862,7 +989,7 @@ exports.default = function (store) {
 };
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -878,17 +1005,47 @@ exports.default = function (store) {
 			super();
 			this.store = store;
 
-			// TODO: render generator initial view
+			// TODO: render generator initial view    
 
 			// TODO: subscribe to store on change event
+			this.onStateChange = this.handleStateChange.bind(this);
 
 			// TODO: add click event
+			this.addEventListener('click', () => {
+				this.store.dispatch({
+					type: 'EXAMPLE_MUTATION',
+					payload: 'You clicked this element'
+				});
+			});
 		}
+
+		handleStateChange(newState) {
+			console.log('ExampleComponent#stateChange', this);
+			this.textContent = newState.example;
+			console.log("binded");
+		}
+
+		connectedCallback() {
+			console.log(" btn connected  ");
+			const generator = new Generator(Object.assign({}, store.state.generators[this.dataset.id]));
+
+			this.innerHTML = `<button>hello</button>`;
+
+			this.addEventListener('click', this.onClickEvent);
+		}
+
+		disconnectedCallback() {
+			console.log('ExampleComponent#onDisconnectedCallback');
+			this.store.unsubscribe(this.onStateChange);
+			console.log("disconnected");
+			this.removeEventListener('click', this.onClickEvent);
+		}
+
 	};
 };
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

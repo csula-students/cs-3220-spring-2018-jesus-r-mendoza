@@ -15,7 +15,9 @@ export default function (store) {
 
 		connectedCallback () {
 			this.store.subscribe(this.onStateChange);
-            this.innerHTML = `<p> hello counter </p>`;
+            
+            console.log("constructed ---");
+            this.addEventListener();
 		}
 
 		disconnectedCallback () {
