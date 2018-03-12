@@ -3,9 +3,11 @@ import constants from './constants';
 
 export default function reducer (state, action) {
 	switch (action.type) {
+            
 	case constants.actions.EXAMPLE:
 		state.example = action.payload;
 		return state;
+            
     case constants.actions.BUY_GENERATOR:
             
         let index = 0;
@@ -22,8 +24,13 @@ export default function reducer (state, action) {
             state.counter = state.counter - price;
             state.generators[index].quantity++;
 		}
+        console.log('action performed -- gen bought');
         return state;
             
+        case constants.actions.BUTTON_CLICK:
+            state.counter++;
+            console.log('action performed -- btn clicked');
+            return state;
 	default:
 		return state;
 	}

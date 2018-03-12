@@ -73,8 +73,27 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+exports.default = {
+	growthRatio: 0.05,
+	actions: {
+		EXAMPLE: 'EXAMPLE_MUTATION',
+		BUY_GENERATOR: 'BUY_GENERATOR',
+		BUTTON_CLICK: 'BTN_CLICKED'
+	}
+};
 
-var _constants = __webpack_require__(1);
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _constants = __webpack_require__(0);
 
 var _constants2 = _interopRequireDefault(_constants);
 
@@ -125,25 +144,6 @@ class Generator {
 	}
 }
 exports.default = Generator;
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-exports.default = {
-	growthRatio: 0.05,
-	actions: {
-		EXAMPLE: 'EXAMPLE_MUTATION',
-		BUY_GENERATOR: 'BUY_GENERATOR',
-		BUTTON_CLICK: 'CLICKED'
-	}
-};
 
 /***/ }),
 /* 2 */
@@ -259,7 +259,7 @@ function main() {
             description: 'To be written at a later date..',
             rate: 5,
             quantity: 0,
-            basecost: 10,
+            baseCost: 10,
             unlockValue: 10
         }, {
             type: 'gen',
@@ -267,64 +267,64 @@ function main() {
             description: 'To be written at a later date..',
             rate: 5,
             quantity: 0,
-            basecost: 0,
-            unlockValue: 10
+            baseCost: 100,
+            unlockValue: 100
         }, {
             type: 'gen',
             name: 'Sneezes',
             description: 'To be written at a later date..',
             rate: 5,
             quantity: 0,
-            basecost: 0,
-            unlockValue: 10
+            baseCost: 500,
+            unlockValue: 500
         }, {
             type: 'gen',
             name: 'People',
             description: 'To be written at a later date..',
             rate: 5,
             quantity: 0,
-            basecost: 0,
-            unlockValue: 10
+            baseCost: 7500,
+            unlockValue: 7500
         }, {
             type: 'gen',
             name: 'Cities',
             description: 'To be written at a later date..',
             rate: 5,
             quantity: 0,
-            basecost: 0,
-            unlockValue: 10
+            baseCost: 50000,
+            unlockValue: 50000
         }, {
             type: 'gen',
             name: 'States',
             description: 'To be written at a later date..',
             rate: 5,
             quantity: 0,
-            basecost: 0,
-            unlockValue: 10
+            baseCost: 500000,
+            unlockValue: 500000
         }, {
             type: 'gen',
             name: 'Countries',
             description: 'To be written at a later date..',
             rate: 5,
             quantity: 0,
-            basecost: 0,
-            unlockValue: 10
+            baseCost: 25000000,
+            unlockValue: 25000000
         }, {
             type: 'gen',
             name: 'Continents',
             description: 'To be written at a later date..',
             rate: 5,
             quantity: 0,
-            basecost: 0,
-            unlockValue: 10
+            baseCost: 1000000000,
+            unlockValue: 1000000000
         }, {
             type: 'gen',
             name: 'Planets',
             description: 'To be written at a later date..',
             rate: 5,
             quantity: 0,
-            basecost: 0,
-            unlockValue: 10
+            baseCost: 100000000000,
+            unlockValue: 100000000000
         }],
         story: []
     };
@@ -885,46 +885,53 @@ function deepCopy(obj) {
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 exports.default = reducer;
 
-var _generator = __webpack_require__(0);
+var _generator = __webpack_require__(1);
 
 var _generator2 = _interopRequireDefault(_generator);
 
-var _constants = __webpack_require__(1);
+var _constants = __webpack_require__(0);
 
 var _constants2 = _interopRequireDefault(_constants);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function reducer(state, action) {
-	switch (action.type) {
-		case _constants2.default.actions.EXAMPLE:
-			state.example = action.payload;
-			return state;
-		case _constants2.default.actions.BUY_GENERATOR:
+  switch (action.type) {
 
-			let index = 0;
+    case _constants2.default.actions.EXAMPLE:
+      state.example = action.payload;
+      return state;
 
-			for (let i = 0; i < state.generators.length; i++) {
-				if (state.generators[i].name == action.payload.name) {
-					index = i;
-				}
-			}
-			const generator = new _generator2.default(Object.assign({}, state.generators[index]));
-			let price = Math.ceil(generator.getCost());
+    case _constants2.default.actions.BUY_GENERATOR:
 
-			if (state.counter >= price) {
-				state.counter = state.counter - price;
-				state.generators[index].quantity++;
-			}
-			return state;
+      let index = 0;
 
-		default:
-			return state;
-	}
+      for (let i = 0; i < state.generators.length; i++) {
+        if (state.generators[i].name == action.payload.name) {
+          index = i;
+        }
+      }
+      const generator = new _generator2.default(Object.assign({}, state.generators[index]));
+      let price = Math.ceil(generator.getCost());
+
+      if (state.counter >= price) {
+        state.counter = state.counter - price;
+        state.generators[index].quantity++;
+      }
+      console.log('action performed -- gen bought');
+      return state;
+
+    case _constants2.default.actions.BUTTON_CLICK:
+      state.counter++;
+      console.log('action performed -- btn clicked');
+      return state;
+    default:
+      return state;
+  }
 }
 
 /***/ }),
@@ -948,21 +955,22 @@ exports.default = function (store) {
             console.log(this.textContent, this.store);
             // TODO: add click event to increment counter
             // hint: use "store.dispatch" method (see example component)=
+            this.addEventListener('click', () => {
+                this.store.dispatch({
+                    type: 'BUTTON_CLICK'
+                });
+            });
         }
 
-        handleStateChange(newState) {
-            console.log('ExampleComponent#stateChange', this);
-            this.textContent = 'btn clicked';
-            console.log(this.textContent);
-        }
+        handleStateChange(newState) {}
 
         connectedCallback() {
-            console.log('ExampleComponent#onConnectedCallback');
+            this.innerHTML = `<button>Clicke Me</button>`;
+
             this.store.subscribe(this.onStateChange);
         }
 
         disconnectedCallback() {
-            console.log('ExampleComponent#onDisconnectedCallback');
             this.store.unsubscribe(this.onStateChange);
         }
 
@@ -1007,6 +1015,12 @@ exports.default = function (store) {
 		}
 	};
 };
+
+var _constants = __webpack_require__(0);
+
+var _constants2 = _interopRequireDefault(_constants);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }),
 /* 11 */
@@ -1079,45 +1093,29 @@ exports.default = function (store) {
             this.onStateChange = this.handleStateChange.bind(this);
 
             // TODO: add click event            
-            console.log("constructed ---");
-            this.addEventListener('click', () => {
-                payload: {
-                    name: generator.name;
-                }
-            });
         }
 
         handleStateChange(newState) {
-            this.textContent = newState.example;
+            this.innerHTML = this.render();
             console.log("binded");
         }
 
         connectedCallback() {
 
-            this.id = this.dataset.id;
-            const generator = new _generator2.default(Object.assign({}, this.store.state.generators[this.id]));
+            let generator = new _generator2.default(Object.assign({}, this.store.state.generators[this.dataset.id]));
 
-            this.innerHTML = `
-                <div class="generators">
-          
-                    <div class="top_row">
-                        <label>Cursor</label>
-                        <label class="quantity">amt</label>
-                    </div>
-          
-                    <p class="description">Description... 
-                        dolor sit amet, consectetur adipiscing elit. Maecenas congue, 
-                        mauris quis mollis cursus, felis tellus ultricies nunc, eu sodales 
-                        dolor urna quis augue
-                    </p>
-          
-                    <div class="btm_row">
-                        <label class="rate">rate</label>
-                        <label class="price">Price</label>
-                    </div>
-          
-                </div>`;
+            this.innerHTML = this.render(generator);
+
             this.store.subscribe(this.onStateChange);
+
+            this.addEventListener('click', () => {
+                this.store.dispatch({
+                    type: _constants2.default.actions.BUY_GENERATOR,
+                    payload: {
+                        name: generator.name
+                    }
+                });
+            });
             console.log("  gen connected  ");
         }
 
@@ -1127,12 +1125,36 @@ exports.default = function (store) {
             this.removeEventListener('click', this.onClickEvent);
         }
 
+        render(generator) {
+            return `
+                <div class="generators">
+          
+                    <div class="top_row">
+                        <label>${generator.name}</label>
+                        <label class="quantity">${generator.quantity}</label>
+                    </div>
+          
+                    <p class="description">${generator.description}
+                    </p>
+          
+                    <div class="btm_row">
+                        <label class="rate">Rate: ${generator.rate}</label>
+                        <label class="price">Price: ${generator.getCost()}</label>
+                    </div>
+          
+                </div>`;
+        }
+
     };
 };
 
-var _generator = __webpack_require__(0);
+var _generator = __webpack_require__(1);
 
 var _generator2 = _interopRequireDefault(_generator);
+
+var _constants = __webpack_require__(0);
+
+var _constants2 = _interopRequireDefault(_constants);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

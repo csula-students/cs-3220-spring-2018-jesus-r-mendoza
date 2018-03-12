@@ -1,4 +1,5 @@
 import Generator from '../models/generator';
+import constants from '../constants';
 
 export default function (store) {
 	return class GeneratorComponent extends window.HTMLElement {
@@ -12,47 +13,30 @@ export default function (store) {
             this.onStateChange = this.handleStateChange.bind(this);
             
 			// TODO: add click event            
-            console.log("constructed ---");
-            this.addEventListener('click', () => {
-                payload: {
-                    name: generator.name                    
-                }
-            });
-            
 		}
         
         handleStateChange (newState) {
-			this.textContent = newState.example;
+			this.innerHTML = this.render();
             console.log("binded");
 		}
         
 		connectedCallback () {
+                    
+            let generator = new Generator(Object.assign({}, this.store.state.generators[this.dataset.id]));
+
+            this.innerHTML = this.render(generator);
             
-            this.id = this.dataset.id;
-			const generator = new Generator(Object.assign({}, this.store.state.generators[this.id]));
-            
-            this.innerHTML = `
-                <div class="generators">
-          
-                    <div class="top_row">
-                        <label>Cursor</label>
-                        <label class="quantity">amt</label>
-                    </div>
-          
-                    <p class="description">Description... 
-                        dolor sit amet, consectetur adipiscing elit. Maecenas congue, 
-                        mauris quis mollis cursus, felis tellus ultricies nunc, eu sodales 
-                        dolor urna quis augue
-                    </p>
-          
-                    <div class="btm_row">
-                        <label class="rate">rate</label>
-                        <label class="price">Price</label>
-                    </div>
-          
-                </div>`;
             this.store.subscribe(this.onStateChange);
-            console.log("  gen connected  ");
+            
+            this.addEventListener('click', () => {
+                this.store.dispatch({
+                    type: constants.actions.BUY_GENERATOR,
+                    payload: {
+                        name: generator.name
+                    }
+                });
+            });
+            console.log("  gen connected  ");           
 		}
 
 		disconnectedCallback () {
@@ -60,6 +44,27 @@ export default function (store) {
             console.log("disconnected");
             this.removeEventListener('click', this.onClickEvent);
 		}
+        
+        
+        render(generator) {
+            return `
+                <div class="generators">
+          
+                    <div class="top_row">
+                        <label>${generator.name}</label>
+                        <label class="quantity">${generator.quantity}</label>
+                    </div>
+          
+                    <p class="description">${generator.description}
+                    </p>
+          
+                    <div class="btm_row">
+                        <label class="rate">Rate: ${generator.rate}</label>
+                        <label class="price">Price: ${generator.getCost()}</label>
+                    </div>
+          
+                </div>`;
+        }
         
 	};
 }

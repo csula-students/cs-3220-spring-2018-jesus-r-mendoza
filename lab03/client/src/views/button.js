@@ -8,21 +8,23 @@ export default function (store) {
             console.log(this.textContent, this.store);
 			// TODO: add click event to increment counter
 			// hint: use "store.dispatch" method (see example component)=
+            this.addEventListener('click', () => {
+                this.store.dispatch({
+                    type: 'BUTTON_CLICK'
+                });
+            });
         }
         
         handleStateChange (newState) {
-            console.log('ExampleComponent#stateChange', this);
-            this.textContent = 'btn clicked';
-            console.log(this.textContent);
         }
 
-        connectedCallback () {
-            console.log('ExampleComponent#onConnectedCallback');
+        connectedCallback () {            
+            this.innerHTML = `<button>Clicke Me</button>`;
+            
             this.store.subscribe(this.onStateChange);
         }
 
         disconnectedCallback () {
-            console.log('ExampleComponent#onDisconnectedCallback');
             this.store.unsubscribe(this.onStateChange);
         }
         

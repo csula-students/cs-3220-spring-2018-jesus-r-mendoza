@@ -84,7 +84,7 @@ function main () {
                 description: 'To be written at a later date..',
                 rate: 5,
                 quantity: 0,
-                basecost: 10,
+                baseCost: 10,
                 unlockValue: 10
             },
             {
@@ -93,8 +93,8 @@ function main () {
                 description: 'To be written at a later date..',
                 rate: 5,
                 quantity: 0,
-                basecost: 0,
-                unlockValue: 10
+                baseCost: 100,
+                unlockValue: 100
             }, 
             {
                 type: 'gen',
@@ -102,8 +102,8 @@ function main () {
                 description: 'To be written at a later date..',
                 rate: 5,
                 quantity: 0,
-                basecost: 0,
-                unlockValue: 10
+                baseCost: 500,
+                unlockValue: 500
             },
             {
                 type: 'gen',
@@ -111,8 +111,8 @@ function main () {
                 description: 'To be written at a later date..',
                 rate: 5,
                 quantity: 0,
-                basecost: 0,
-                unlockValue: 10
+                baseCost: 7500,
+                unlockValue: 7500
             },
             {
                 type: 'gen',
@@ -120,8 +120,8 @@ function main () {
                 description: 'To be written at a later date..',
                 rate: 5,
                 quantity: 0,
-                basecost: 0,
-                unlockValue: 10
+                baseCost: 50000,
+                unlockValue: 50000
             },
             {
                 type: 'gen',
@@ -129,8 +129,8 @@ function main () {
                 description: 'To be written at a later date..',
                 rate: 5,
                 quantity: 0,
-                basecost: 0,
-                unlockValue: 10
+                baseCost: 500000,
+                unlockValue: 500000
             },
             {
                 type: 'gen',
@@ -138,8 +138,8 @@ function main () {
                 description: 'To be written at a later date..',
                 rate: 5,
                 quantity: 0,
-                basecost: 0,
-                unlockValue: 10
+                baseCost: 25000000,
+                unlockValue: 25000000
             },
             {
                 type: 'gen',
@@ -147,8 +147,8 @@ function main () {
                 description: 'To be written at a later date..',
                 rate: 5,
                 quantity: 0,
-                basecost: 0,
-                unlockValue: 10
+                baseCost: 1000000000,
+                unlockValue: 1000000000
             },
             {
                 type: 'gen',
@@ -156,8 +156,8 @@ function main () {
                 description: 'To be written at a later date..',
                 rate: 5,
                 quantity: 0,
-                basecost: 0,
-                unlockValue: 10
+                baseCost: 100000000000,
+                unlockValue: 100000000000
             }
             
 	   ], 

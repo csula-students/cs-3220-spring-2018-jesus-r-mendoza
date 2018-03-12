@@ -3,6 +3,6 @@ export default {
 	actions: {
 		EXAMPLE: 'EXAMPLE_MUTATION',
 		BUY_GENERATOR: 'BUY_GENERATOR',
-        BUTTON_CLICK: 'CLICKED'
+        BUTTON_CLICK: 'BTN_CLICKED'
 	}
 };
