@@ -1,0 +1,20 @@
+Theme:
+# Bacteria Multiplication
+
+Resource:
+* Bacterium
+
+Generators:
+* Cursor
+* Hands
+* Sneezes
+* People
+* Cities
+* States
+* Countries
+* Continents
+* Planets
+
+Story:
+* Want to spread bacteria? Click the clicker.
+* Your bacteria is spread for miles around.

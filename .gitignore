@@ -1,0 +1,23 @@
+.DS_Store
+
+.gradle
+/build/
+
+.idea/
+.idea/**
+cs-3220-spring-2018-jesus-r-mendoza.iml
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Cache of project
+.gradletasknamecache
+
+# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
+# gradle/wrapper/gradle-wrapper.properties
+
+src/main/webapp/js/app.bundle.js
+src/main/webapp/js/app.bundle.js.map

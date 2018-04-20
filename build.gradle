@@ -1,0 +1,50 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    jcenter()
+}
+
+// In this section you declare the dependencies for your production and test code
+dependencies {
+    // The production code uses the SLF4J logging API at compile time
+    compile 'org.slf4j:slf4j-api:1.7.24'
+    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+    // JSTL
+    compile group: 'javax.servlet.jsp', name: 'javax.servlet.jsp-api', version: '2.3.1'
+    // MySQL JDBC
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.43'
+
+    // Following is for building RESTful services
+    // JAX-RS -- Jersey
+    // compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.0.1'
+    // JAX-RS -- Jersey Servlet
+    compile group: 'org.glassfish.jersey.containers', name: 'jersey-container-servlet', version: '2.25'
+    // JAX-RS -- Jersey Jackson
+    // compile group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jackson', version: '2.25.1'
+
+    // JUnit for running simple tests
+    testCompile 'junit:junit:4.12'
+}
+
+gretty {
+    httpPort = 8080
+    contextPath = '/'
+}
+
+// Javac related task to generate classpath for linter
+task generateClasspath {
+	description 'Generate classpath file for Javac linter'
+	ext.destFile = file("$buildDir/classpath.txt")
+	outputs.file destFile
+	doLast {
+		def classpathString = sourceSets.main.runtimeClasspath.collect{ it.absolutePath }.join(File.pathSeparator)
+		if (!destFile.parentFile.exists()) {
+			destFile.parentFile.mkdirs()
+		}
+		assert destFile.parentFile.exists()
+		destFile.text = 'export CLASSPATH="' + classpathString + '"'
+	}
+}
