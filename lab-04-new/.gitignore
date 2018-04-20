@@ -3,10 +3,6 @@
 .gradle
 /build/
 
-.idea/
-.idea/**
-cs-3220-spring-2018-jesus-r-mendoza.iml
-
 # Ignore Gradle GUI config
 gradle-app.setting
 
@@ -21,3 +17,11 @@ gradle-app.setting
 
 src/main/webapp/js/app.bundle.js
 src/main/webapp/js/app.bundle.js.map
+
+tags*
+
+dest/
+.idea/
+
+lab03/
+lab03/**
