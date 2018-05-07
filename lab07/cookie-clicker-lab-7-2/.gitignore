@@ -23,3 +23,5 @@ tags*
 dest/
 .idea/
 /bin/
+
+!__GRADLE-ISSUE-INFO.txt
