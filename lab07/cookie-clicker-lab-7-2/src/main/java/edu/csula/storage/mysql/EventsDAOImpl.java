@@ -31,7 +31,7 @@ public class EventsDAOImpl implements EventsDAO {
 	}
 	
 	
-	/*  Please read the __GRADLE-ISSUE-INFO.txt.
+	/*  Please read the __GRADLE-ISSUE-INFO.txt
 	 *  
 	 *  In this assignment I encountered a problem while running the "gradlew build" & "gradlew check" commands.
 	 *  I only included the untested logic for each method in order to not leave a blank assignment.
