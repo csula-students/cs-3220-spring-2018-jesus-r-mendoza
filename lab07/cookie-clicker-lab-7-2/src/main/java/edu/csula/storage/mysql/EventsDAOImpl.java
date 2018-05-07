@@ -56,14 +56,9 @@ public class EventsDAOImpl implements EventsDAO {
 		try ( Connection connection = context.getConnection(); PreparedStatement statement = connection.prepareStatement(getByIdQuery); ) {
 			statement.setInt(1, id);
 			ResultSet rs = statement.executeQuery();
-			boolean val = rs.next();
-			System.out.println(val);
-			if( val ) {
+			if( rs.next() ) {
 				System.out.println(id + " -- right before");
 				Event e = new Event(id, rs.getString("name"), rs.getString("description"), rs.getInt("trigger_at"));
-				System.out.println(id + " -- right after");
-				System.out.println("retrieved values -- " + rs.getInt("id") + ", " + rs.getString("name") + ", " + rs.getString("description") + ", " + rs.getInt("trigger_at"));				
-				System.out.println("retrieved values -- " + e.getId() + ", " + e.getName() + ", " + e.getDescription() + ", " + e.getTriggerAt() );				
 				return Optional.of(e);
 			}
 			
