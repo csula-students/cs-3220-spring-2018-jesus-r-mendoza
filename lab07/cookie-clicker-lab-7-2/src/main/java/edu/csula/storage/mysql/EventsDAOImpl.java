@@ -56,8 +56,14 @@ public class EventsDAOImpl implements EventsDAO {
 		try ( Connection connection = context.getConnection(); PreparedStatement statement = connection.prepareStatement(getByIdQuery); ) {
 			statement.setInt(1, id);
 			ResultSet rs = statement.executeQuery();
-			if( rs.next() ) {
-				Event e = new Event(id, rs.getString("name"), rs.getString("description"), rs.getInt("trigger_at"));
+			String name, desc;
+			int id_other, trig;
+			while( rs.next() ) {
+				id_other = rs.getInt(1);
+				name = rs.getString(2);
+				desc = rs.getString(3);
+				trig = rs.getInt(4);
+				Event e = new Event(id_other, name, desc, trig);
 				if (e.getId() == id) return Optional.of(e);
 			}
 			
@@ -85,7 +91,6 @@ public class EventsDAOImpl implements EventsDAO {
 					case "name":
 						other += "name = " + event.getName() + ";";
 						statement.setString(2, event.getName());
-						System.out.println(other);
 						other = "UPDATE Events SET ";
 						break;
 					case "description":
