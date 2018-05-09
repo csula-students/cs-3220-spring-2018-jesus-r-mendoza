@@ -29,16 +29,7 @@ public class EventsDAOImpl implements EventsDAO {
 	public EventsDAOImpl(Database context) {
 		this.context = context;
 	}
-	
-	
-	/*  Please read the __GRADLE-ISSUE-INFO.txt
-	 *  
-	 *  In this assignment I encountered a problem while running the "gradlew build" & "gradlew check" commands.
-	 *  I only included the untested logic for each method in order to not leave a blank assignment.
-	 *  Please read the file mentioned above to view the details and stacktrace. Thank you. 
-	 */	
-	
-	
+		
 	@Override
 	public List<Event> getAll() {
 		// TODO: get all events from jdbc
@@ -61,15 +52,13 @@ public class EventsDAOImpl implements EventsDAO {
 
 	@Override
 	public Optional<Event> getById(int id) {
-		
-		/* Untested due to gradle issue ; will try to resolve by soon  */
-		
+				
 		try ( Connection connection = context.getConnection(); PreparedStatement statement = connection.prepareStatement(getByIdQuery); ) {
 			statement.setInt(1, id);
 			ResultSet rs = statement.executeQuery();
 			if( rs.next() ) {
 				Event e = new Event(id, rs.getString("name"), rs.getString("description"), rs.getInt("trigger_at"));
-				return Optional.of(e);
+				if (e.getId() == id) return Optional.of(e);
 			}
 			
 		} catch (SQLException e) {
@@ -80,28 +69,41 @@ public class EventsDAOImpl implements EventsDAO {
 
 	@Override
 	public void set(int id, Event event) {
-		
-		/* Untested due to gradle issue ; will try to resolve by soon  */
-		
 		// TODO: update specific event by id
 		try ( Connection connection = context.getConnection(); PreparedStatement statement = connection.prepareStatement(setQuery); ) {
 			
+			int count = 0;
+			String other = "UPDATE Events SET ";
 			String[] attributes = new String[3];
-			for ( String str : attributes ) {
-				statement.setString(1, str);
-				switch (str) {
+			attributes[0] = "name";
+			attributes[1] = "description";
+			attributes[2] = "trigger_at";
+			//for ( String str : attributes ) {
+				count++;
+				statement.setString(1, attributes[0]);
+				switch (attributes[0]) {
 					case "name":
+						other += "name = " + event.getName() + ";";
 						statement.setString(2, event.getName());
+						System.out.println(other);
+						other = "UPDATE Events SET ";
 						break;
 					case "description":
+						other += "desc = " + event.getDescription() + ";";
 						statement.setString(2, event.getDescription());
+						System.out.println(other);
+						other = "UPDATE Events SET ";
 						break;
 					case "trigger_at":
+						other += "trig = " + event.getTriggerAt() + ";";
 						statement.setInt(2, event.getTriggerAt());
+						System.out.println(other);
+						other = "UPDATE Events SET ";
+						break;
 				}
 				statement.setInt(3, id);
 				statement.executeUpdate();
-			}
+			//}
 									
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -109,10 +111,7 @@ public class EventsDAOImpl implements EventsDAO {
 	}
 
 	@Override
-	public void add(Event event) {
-		
-		/* Untested due to gradle issue ; will try to resolve by soon  */
-		
+	public void add(Event event) {		
 		// TODO: implement jdbc logic to add a new event
 		try (Connection c = context.getConnection(); PreparedStatement statement = c.prepareStatement(addQuery)) {
 			statement.setInt(1, event.getId());
@@ -126,10 +125,7 @@ public class EventsDAOImpl implements EventsDAO {
 	}
 
 	@Override
-	public void remove(int id) {
-		
-		/* Untested due to gradle issue ; will try to resolve by soon  */
-		
+	public void remove(int id) {		
 		// TODO: implement jdbc logic to remove event by id
 		try (Connection c = context.getConnection(); PreparedStatement statement = c.prepareStatement(removeQuery)) {
 			statement.setInt(1, id);
